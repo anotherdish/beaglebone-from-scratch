@@ -43,3 +43,15 @@ RUN PATH=/root/x-tools/arm-cortex_a8-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm
         PATH=/root/x-tools/arm-cortex_a8-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-cortex_a8-linux-gnueabi- ARCH=arm make
 
 RUN mkdir -p /root/uboot/arm-cortex_a8-linux-gnueabi && cp /work/u-boot/u-boot* /root/uboot/arm-cortex_a8-linux-gnueabi
+
+RUN apt install qemu-utils parted udev -y
+
+# create the disk image that we are going to be booting from
+WORKDIR /work
+RUN qemu-img create -f raw disk.img 16G
+# create the partition table
+RUN parted disk.img mklabel msdos 
+# make the boot partition
+RUN parted disk.img mkpart primary fat32 0 1GB
+# make the root partition
+RUN parted disk.img mkpart primary ext4 1GB 16GB
