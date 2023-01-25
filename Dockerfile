@@ -12,7 +12,7 @@ WORKDIR /work
 
 RUN git clone https://github.com/crosstool-ng/crosstool-ng.git
 
-RUN cd crosstool-ng && git checkout crosstool-ng-1.25.0 && ./bootstrap && ./configure && make && make install
+RUN cd crosstool-ng && git checkout crosstool-ng-1.25.0 && ./bootstrap && ./configure && make -j2 && make install
 
 #the config provided here in toolchain/.config is default options with CT_PREFIX_DIR_RO set to n
 COPY toolchain /work/
@@ -35,13 +35,13 @@ RUN git clone https://source.denx.de/u-boot/u-boot.git && cd u-boot && git check
 WORKDIR /work/u-boot
 # in this, the cross compile option is basically specifying which value in the path is going to be used as a prefix for the compiler and other shit
 RUN PATH=/root/x-tools/arm-unknown-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-unknown-linux-gnueabi- ARCH=arm make qemu_arm_defconfig && \
-        PATH=/root/x-tools/arm-unknown-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-unknown-linux-gnueabi- ARCH=arm make
+        PATH=/root/x-tools/arm-unknown-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-unknown-linux-gnueabi- ARCH=arm make -j2
 
 RUN mkdir -p /root/uboot/arm-unkown-linux-gnueabi && cp /work/u-boot/u-boot* /root/uboot/arm-unkown-linux-gnueabi
 
 # now do the same thing for arm-cortex_a8-linux-gnueabi and arm-cortex_a8-linux-gnueabihf
 RUN PATH=/root/x-tools/arm-cortex_a8-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-cortex_a8-linux-gnueabi- ARCH=arm make qemu_arm_defconfig && \
-        PATH=/root/x-tools/arm-cortex_a8-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-cortex_a8-linux-gnueabi- ARCH=arm make
+        PATH=/root/x-tools/arm-cortex_a8-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-cortex_a8-linux-gnueabi- ARCH=arm make -j2
 
 RUN mkdir -p /root/uboot/arm-cortex_a8-linux-gnueabi && cp /work/u-boot/u-boot* /root/uboot/arm-cortex_a8-linux-gnueabi
 
