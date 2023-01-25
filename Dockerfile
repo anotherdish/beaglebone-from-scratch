@@ -1,13 +1,14 @@
-from ubuntu:20.04
+FROM ubuntu:20.04
 
-run apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
+RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
         autoconf automake bison bzip2 cmake flex g++ gawk gcc                             `# for crosstool-ng` \ 
         gettext git gperf help2man libncurses5-dev libstdc++6 libtool libtool-bin make \
         patch python3-dev rsync texinfo unzip wget xz-utils \
-        libssl-dev bc                                                                     `# for uboot` 
+        libssl-dev bc                                                                     `# for uboot` \
+        qemu-utils parted udev                                                    `# for image creation` 
 
 RUN mkdir /work
-workdir /work
+WORKDIR /work
 
 RUN git clone https://github.com/crosstool-ng/crosstool-ng.git
 
@@ -43,8 +44,6 @@ RUN PATH=/root/x-tools/arm-cortex_a8-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm
         PATH=/root/x-tools/arm-cortex_a8-linux-gnueabi/bin:${PATH} CROSS_COMPILE=arm-cortex_a8-linux-gnueabi- ARCH=arm make
 
 RUN mkdir -p /root/uboot/arm-cortex_a8-linux-gnueabi && cp /work/u-boot/u-boot* /root/uboot/arm-cortex_a8-linux-gnueabi
-
-RUN apt install qemu-utils parted udev -y
 
 # create the disk image that we are going to be booting from
 WORKDIR /work
