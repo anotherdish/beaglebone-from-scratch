@@ -1,0 +1,4 @@
+1. run `arm-none-eabi-as -o startup.o startup.s` to assemble the startup file
+   you can use `arm-none-eabi-ld --sections startup.o` to see/list the sections
+2. `arm-none-eabi-ld -T solution.ld -o startup.elf startup.o` to link the object file into an elf file
+3. use `arm-none-eabi-objdump -s -j .text startup.elf` to dump the contents of the `.text` section

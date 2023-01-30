@@ -12,4 +12,10 @@ RUN python3 -m pip install 'xonsh[full]'
 WORKDIR /root
 
 # copy the startup file into the container
-ADD startup.s /root/
+ADD Makefile startup.s solution.ld /root/
+
+# assembly the startup file
+RUN arm-none-eabi-as -o startup.o startup.s
+
+# # link the object file into an elf file
+RUN arm-none-eabi-ld -T solution.ld -o startup.elf startup.o
