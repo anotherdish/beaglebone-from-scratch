@@ -1,4 +1,4 @@
-TUTORIAL_STAGE = 2
+TUTORIAL_STAGE = 3
 IMAGE_NAME = build
 
 #build the docker image

@@ -1,4 +1,4 @@
-TUTORIAL_STAGE = 2
+TUTORIAL_STAGE = 3
 IMAGE_NAME = build
 
 #build the docker image
@@ -8,7 +8,3 @@ build:
 #run the docker image
 run:
 	docker run -it --rm $(IMAGE_NAME):$(TUTORIAL_STAGE)
-
-#this is to be run in the container
-solve:
-	
