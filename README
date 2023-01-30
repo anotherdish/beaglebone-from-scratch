@@ -1,4 +1,4 @@
-* BEAGLEBONE FROM SCRATCH
+# BEAGLEBONE FROM SCRATCH
 
 the purpose of this repo is to compile all of the stuff required to get a beaglebone black running (cross compiler, bootloader (uboot), and the kernel)
 
@@ -9,3 +9,7 @@ NEXT
 we are going to rip the stuff off of a beagleboneblack and emulate it in qemu system so we can pretend like we are trying to emulate the contents of a arbitrary iot device
 
 GLHF
+
+
+## index
+
