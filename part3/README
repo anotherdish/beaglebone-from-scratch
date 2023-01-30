@@ -1,0 +1,11 @@
+INTERACTIVE EXERCISE
+
+this part is just going to be for playing around with linker scripts, because as i am doing stuff i realized that i want more reps in there
+
+OBJECTIVE:
+
+using the following binaries: `arm-none-eabi-as`, `arm-none-eabi-ld`, and `arm-none-eabi-objcopy`, give me a linker script that will arrange the sections in `startup.s` in alphabetical order, and putting all of the sections in the output file's text section
+
+the output should look like this
+
+![the image](2023-01-30-10-48-40.png)
