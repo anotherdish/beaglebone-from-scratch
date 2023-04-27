@@ -1,0 +1,17 @@
+# INTERACTIVE EXERCISE
+
+still in linker scripts
+
+OBJECTIVE:
+
+now that we kinda know something about something, we want to be able to map our sections to parts of memory that have different permissions
+
+create a linker script that takes the sections from our `main.s` file and maps them to a new object file `solution.o`
+
+the linker script created should output 
+
+BINARIES TO USE:
+
+* `arm-none-eabi-as`
+* `arm-none-eabi-ld`
+* `arm-none-eabi-objdump`
